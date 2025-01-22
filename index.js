@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 require('dotenv').config()
 
-const Usuarios = require('./modeles/user')
+const Usuarios = require('./src/modeles/user')
 const { error } = require('console')
 const app = express()
 
