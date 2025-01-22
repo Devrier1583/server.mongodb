@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 require('dotenv').config()
 
-const Usuarios = require('./src/modeles/user')
+const Usuarios = require('./modeles/user')
 const { error } = require('console')
 const app = express()
 
@@ -21,13 +21,14 @@ mongoose.connect(process.env.DB_URI,{
 
 .catch((error)=> console.log('Error de conexion a la db:', error))
 
-app.post('/usuarios',async(req, res)=>{
+app.post('/Usuarios',async(req, res)=>{
     try{
         const {nombre, email, telefono, edad} = req.body
         const nuevoUsuario = new Usuarios({nombre, email, telefono, edad})
         await nuevoUsuario.save();
         res.status(201).json({
-            message: 'Usuario creado con exito', usuario: nuevoUsuario
+            //message: 'Usuario creado con exito', usuario: nuevoUsuario
+            message: 'Usuario creado con exito', Usuarios: nuevoUsuario
         })
 
     }
@@ -38,7 +39,7 @@ app.post('/usuarios',async(req, res)=>{
     }
 })
 
-app.get('/usuarios', async(req,res)=>{
+app.get('/Usuarios', async(req,res)=>{
     try{
         const user = await Usuarios.find()
         res.status(200).json(user)
