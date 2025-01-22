@@ -21,7 +21,7 @@ mongoose.connect(process.env.DB_URI,{
 
 .catch((error)=> console.log('Error de conexion a la db:', error))
 
-app.post('/Usuarios',async(req, res)=>{
+app.post('/usuarios',async(req, res)=>{
     try{
         const {nombre, email, telefono, edad} = req.body
         const nuevoUsuario = new Usuarios({nombre, email, telefono, edad})
@@ -38,7 +38,7 @@ app.post('/Usuarios',async(req, res)=>{
     }
 })
 
-app.get('/Usuarios', async(req,res)=>{
+app.get('/usuarios', async(req,res)=>{
     try{
         const user = await Usuarios.find()
         res.status(200).json(user)
@@ -49,7 +49,12 @@ app.get('/Usuarios', async(req,res)=>{
         })
     }
 })
-
+/**
+ * Ruta raiz o principal
+ */
+app.get('/',function(req,res){
+    res.json({succes:'Api conectada correctamente'})
+})
 const PORT = process.env.PORT
 
 app.listen(PORT, ()=>{console.log(`Servidor escuchando en el puerto ${PORT}`)})
